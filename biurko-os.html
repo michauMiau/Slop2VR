@@ -26,6 +26,7 @@
   #win.show { display: flex; }
   #win .cat { font-size: 64px; }
   #win .big { font-size: 26px; margin: 10px 0 4px; }
+  #win .sub { font-size: 14px; color: #c9b98f; margin-top: 6px; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/aframe@1.7.0/dist/aframe.min.js"></script>
 </head>
@@ -39,52 +40,63 @@
   <div class="hint" id="xrstate"></div>
 </div>
 <div id="msg"></div>
-<div id="win"><div class="cat">😺</div><div class="big">Zmiana zakończona</div><div id="winsum"></div></div>
+<div id="win"><div class="cat">😺</div><div class="big">Zmiana zakończona</div><div id="winsum"></div><div class="sub">Możesz zamknąć stronę albo posprzątać kartki na podłodze</div></div>
 
-<a-scene renderer="antialias: true; colorManagement: true" background="color: #12131a">
+<a-scene xr-held-pose renderer="antialias: true; colorManagement: true" background="color: #12131a">
   <a-entity id="cam" camera="fov: 72" look-controls wasd-controls position="0 1.6 1.9"></a-entity>
 
-  <a-entity light="type: ambient; color: #a7b6c8; intensity: 1.15"></a-entity>
-  <a-entity light="type: directional; color: #cfe4ff; intensity: 1.15" position="-2.6 2.4 0.6"></a-entity>
+  <a-entity light="type: hemisphere; color: #b8c6d6; groundColor: #6b5238; intensity: 0.85"></a-entity>
+  <a-entity light="type: directional; color: #ffe9d2; intensity: 1.2; castShadow: true; shadowMapWidth: 1024; shadowMapHeight: 1024; shadowCameraLeft: -4; shadowCameraRight: 4; shadowCameraTop: 4.5; shadowCameraBottom: -3; shadowCameraNear: 0.5; shadowCameraFar: 12; shadowBias: -0.0003" position="-2.6 2.4 0.6"></a-entity>
   <a-entity light="type: point; color: #ffd9b0; intensity: 0.8; distance: 6" position="0.4 2.1 0.2"></a-entity>
 
-  <a-plane position="0 0 0" rotation="-90 0 0" width="7" height="7" material="color: #8f6b4a; roughness: 0.9"></a-plane>
+  <a-plane position="0 0 0" rotation="-90 0 0" width="7" height="7" material="color: #8f6b4a; roughness: 0.9" receiveShadow="true"></a-plane>
   <a-plane position="0 3.2 0" rotation="90 0 0" width="7" height="7" material="color: #e0d2bd"></a-plane>
-  <a-plane position="0 1.6 -2.8" width="7" height="3.2" material="color: #c9a47f"></a-plane>
-  <a-plane position="0 1.6 2.8" width="7" height="3.2" rotation="0 180 0" material="color: #c9a47f"></a-plane>
-  <a-plane position="-3 1.6 0" width="7" height="3.2" rotation="0 90 0" material="color: #c1a07d"></a-plane>
-  <a-plane position="3 1.6 0" width="7" height="3.2" rotation="0 -90 0" material="color: #c1a07d"></a-plane>
+  <a-plane position="0 1.6 -2.8" width="7" height="3.2" material="color: #c9a47f" receiveShadow="true"></a-plane>
+  <a-plane position="0 1.6 2.8" width="7" height="3.2" rotation="0 180 0" material="color: #c9a47f" receiveShadow="true"></a-plane>
+  <a-plane position="-3 1.6 0" width="7" height="3.2" rotation="0 90 0" material="color: #c1a07d" receiveShadow="true"></a-plane>
+  <a-plane position="3 1.6 0" width="7" height="3.2" rotation="0 -90 0" material="color: #c1a07d" receiveShadow="true"></a-plane>
   <a-plane position="-2.98 1.9 0.3" width="1.0" height="0.75" rotation="0 90 0" material="color: #d9ecff; shader: flat"></a-plane>
 
-  <a-box position="0 0.75 -0.45" width="1.6" height="0.06" depth="0.75" material="color: #6f4a2f; roughness: 0.7"></a-box>
-  <a-box position="-0.7 0.375 -0.72" width="0.07" height="0.72" depth="0.07" material="color: #5b3b24"></a-box>
-  <a-box position="0.7 0.375 -0.72" width="0.07" height="0.72" depth="0.07" material="color: #5b3b24"></a-box>
-  <a-box position="-0.7 0.375 -0.18" width="0.07" height="0.72" depth="0.07" material="color: #5b3b24"></a-box>
-  <a-box position="0.7 0.375 -0.18" width="0.07" height="0.72" depth="0.07" material="color: #5b3b24"></a-box>
-  <a-box position="0.02 0.79 -0.2" width="0.44" height="0.03" depth="0.15" material="color: #2c313a"></a-box>
-  <a-box position="0.42 0.79 -0.18" width="0.07" height="0.03" depth="0.1" material="color: #3a414c"></a-box>
-  <a-cylinder position="-0.62 0.84 -0.55" radius="0.05" height="0.12" material="color: #b2603c; roughness: 0.6"></a-cylinder>
+  <a-plane position="0 0.012 0.9" rotation="-90 0 0" width="2.6" height="1.8" material="color: #5c6b62; roughness: 0.95" receiveShadow="true"></a-plane>
 
-  <a-box position="0 1.16 -0.76" width="1.2" height="0.76" depth="0.05" material="color: #232931"></a-box>
-  <a-box position="0 0.82 -0.77" width="0.06" height="0.38" depth="0.06" material="color: #2c333d"></a-box>
-  <a-box position="0 0.79 -0.77" width="0.3" height="0.02" depth="0.24" material="color: #2c333d"></a-box>
+  <a-box position="0 0.75 -0.45" width="1.6" height="0.06" depth="0.75" material="color: #6f4a2f; roughness: 0.7" castShadow="true" receiveShadow="true"></a-box>
+  <a-box position="-0.7 0.375 -0.72" width="0.07" height="0.72" depth="0.07" material="color: #5b3b24" castShadow="true"></a-box>
+  <a-box position="0.7 0.375 -0.72" width="0.07" height="0.72" depth="0.07" material="color: #5b3b24" castShadow="true"></a-box>
+  <a-box position="-0.7 0.375 -0.18" width="0.07" height="0.72" depth="0.07" material="color: #5b3b24" castShadow="true"></a-box>
+  <a-box position="0.7 0.375 -0.18" width="0.07" height="0.72" depth="0.07" material="color: #5b3b24" castShadow="true"></a-box>
+  <a-box position="0.02 0.79 -0.2" width="0.44" height="0.03" depth="0.15" material="color: #2c313a" castShadow="true"></a-box>
+  <a-box position="0.42 0.79 -0.18" width="0.07" height="0.03" depth="0.1" material="color: #3a414c" castShadow="true"></a-box>
+  <a-cylinder position="-0.62 0.84 -0.55" radius="0.05" height="0.12" material="color: #b2603c; roughness: 0.6" castShadow="true"></a-cylinder>
 
-  <a-box position="0 1.18 -2.42" width="3.2" height="0.06" depth="0.35" material="color: #6f4a2f; roughness: 0.7"></a-box>
-  <a-box position="-1.5 0.95 -2.42" width="0.05" height="0.44" depth="0.3" material="color: #5b3b24"></a-box>
-  <a-box position="1.5 0.95 -2.42" width="0.05" height="0.44" depth="0.3" material="color: #5b3b24"></a-box>
+  <a-box position="0 1.16 -0.76" width="1.2" height="0.76" depth="0.05" material="color: #232931" castShadow="true"></a-box>
+  <a-box position="0 0.82 -0.77" width="0.06" height="0.38" depth="0.06" material="color: #2c333d" castShadow="true"></a-box>
+  <a-box position="0 0.79 -0.77" width="0.3" height="0.02" depth="0.24" material="color: #2c333d" castShadow="true"></a-box>
+
+  <a-box position="0 1.18 -2.42" width="3.2" height="0.06" depth="0.35" material="color: #6f4a2f; roughness: 0.7" castShadow="true" receiveShadow="true"></a-box>
+  <a-box position="-1.5 0.95 -2.42" width="0.05" height="0.44" depth="0.3" material="color: #5b3b24" castShadow="true"></a-box>
+  <a-box position="1.5 0.95 -2.42" width="0.05" height="0.44" depth="0.3" material="color: #5b3b24" castShadow="true"></a-box>
+
+  <a-entity position="1.5 1.24 -2.42">
+    <a-cylinder radius="0.09" height="0.14" material="color: #b2603c; roughness: 0.6" castShadow="true"></a-cylinder>
+    <a-sphere position="0 0.17 0" radius="0.11" material="color: #5a7a4e" castShadow="true"></a-sphere>
+    <a-sphere position="0.08 0.23 0.04" radius="0.07" material="color: #6b8f5c" castShadow="true"></a-sphere>
+    <a-sphere position="-0.07 0.22 -0.05" radius="0.06" material="color: #4f6b46" castShadow="true"></a-sphere>
+  </a-entity>
 
   <a-entity id="bin" position="1.12 0 -0.55">
     <a-cylinder position="0 0.21 0" radius="0.24" height="0.42" open-ended="true"
-      material="color: #99a2aa; metalness: 0.2; roughness: 0.55; side: double"></a-cylinder>
+      material="color: #99a2aa; metalness: 0.2; roughness: 0.55; side: double" castShadow="true"></a-cylinder>
     <a-circle position="0 0.02 0" rotation="-90 0 0" radius="0.23" material="color: #55606a; roughness: 0.6"></a-circle>
     <a-torus position="0 0.42 0" rotation="90 0 0" radius="0.24" radius-tubular="0.022"
-      material="color: #aab3bb; metalness: 0.3; roughness: 0.4"></a-torus>
+      material="color: #aab3bb; metalness: 0.3; roughness: 0.4" castShadow="true"></a-torus>
   </a-entity>
   <a-entity light="type: point; color: #9fb0bd; intensity: 0.4; distance: 3" position="1.12 0.9 -0.55"></a-entity>
 
   <a-entity position="1.12 0.3 -0.31" geometry="plane: width 0.3; height 0.12"
     material="color: #3d4750; shader: flat"></a-entity>
   <a-entity id="binlabel" position="1.12 0.3 -0.305"></a-entity>
+
+  <a-entity id="poster" position="-2.96 1.7 0.9" rotation="0 90 0"></a-entity>
 </a-scene>
 
 <script>
@@ -137,6 +149,7 @@ function buildFolder(d) {
   const body = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.52, 0.08), stdMat(d.color, 0.6, 0.08));
   const mouth = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.05, 0.12), stdMat(darker(d.color, 0.6), 0.5, 0.1));
   mouth.position.y = 0.27;
+  body.castShadow = mouth.castShadow = true;
   const ctx = document.createElement('canvas').getContext('2d');
   ctx.canvas.width = 320; ctx.canvas.height = 96;
   const tex = new THREE.CanvasTexture(ctx.canvas); tex.anisotropy = 4;
@@ -144,7 +157,7 @@ function buildFolder(d) {
   label.position.set(0, 0.15, 0.045);
   el.object3D.add(body, mouth, label);
   sceneEl.appendChild(el);
-  const f = { key: d.key, label: d.label, color: d.color, el, ctx, tex };
+  const f = { key: d.key, label: d.label, color: d.color, el, ctx, tex, body };
   folders.push(f);
   drawFolderLabel(f);
 }
@@ -175,8 +188,11 @@ function buildPaper(p) {
   const el = document.createElement('a-entity');
   el.classList.add('grab', 'paper');
   el.__meta = { id: p.id, dest: p.dest, name: p.name, baseY: 0.84, phase: Math.random() * 6.28 };
-  el.setObject3D('mesh', new THREE.Mesh(new THREE.PlaneGeometry(0.21, 0.29),
-    new THREE.MeshStandardMaterial({ map: paperTex(p), roughness: 0.85, side: THREE.DoubleSide })));
+  const mat = new THREE.MeshStandardMaterial({ map: paperTex(p), roughness: 0.85, side: THREE.DoubleSide });
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(0.21, 0.29), mat);
+  mesh.castShadow = true;
+  el.setObject3D('mesh', mesh);
+  el.__mat = mat;
   el.setAttribute('position', `${p.x} 0.84 ${p.z}`);
   el.object3D.rotation.set(0, (Math.random() - 0.5) * 0.6, 0);
   sceneEl.appendChild(el);
@@ -270,6 +286,18 @@ function buildBinLabel() {
   document.getElementById('binlabel').setObject3D('mesh',
     new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.12), new THREE.MeshBasicMaterial({ map: BIN_LABEL })));
 }
+function buildPoster() {
+  const tex = makeCanvasTex(256, 320, g => {
+    g.fillStyle = '#2b3846'; g.fillRect(0, 0, 256, 320);
+    g.fillStyle = '#f7f1e4'; g.fillRect(14, 14, 228, 292);
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.font = '150px sans-serif'; g.fillText('🐱', 128, 126);
+    g.fillStyle = '#6b5f4c'; g.font = 'bold 18px sans-serif'; g.fillText('garfild_foto.jpg', 128, 252);
+    g.textAlign = 'left';
+  });
+  document.getElementById('poster').setObject3D('mesh',
+    new THREE.Mesh(new THREE.PlaneGeometry(0.38, 0.48), new THREE.MeshBasicMaterial({ map: tex })));
+}
 
 function refreshGrabList() { grabEls = folders.map(f => f.el).concat(papers); }
 
@@ -289,15 +317,50 @@ function rayScreen(e) {
   const hits = ray.intersectObjects(grabEls.map(el => el.object3D), true);
   return hits.length ? walkUp(hits[0].object) : null;
 }
+
+const mouseNDC = new THREE.Vector2();
+let mouseSeen = false, hoverEl = null;
+window.addEventListener('mousemove', e => {
+  if (!sceneEl.renderer) return;
+  const rect = sceneEl.renderer.domElement.getBoundingClientRect();
+  mouseNDC.set((e.clientX - rect.left) / rect.width * 2 - 1, -((e.clientY - rect.top) / rect.height * 2 - 1));
+  mouseSeen = true;
+});
+function rayNDC() {
+  if (!sceneEl.camera || !mouseSeen || !grabEls.length) return null;
+  ray.setFromCamera(mouseNDC, sceneEl.camera);
+  const hits = ray.intersectObjects(grabEls.map(el => el.object3D), true);
+  return hits.length ? walkUp(hits[0].object) : null;
+}
+function highlightTick() {
+  let h = null;
+  if (!held) {
+    if (sceneEl.is('vr-mode')) h = ctrlEls.find(c => c.__hover)?.__hover ?? null;
+    else h = rayNDC();
+  }
+  if (hoverEl && hoverEl !== h && hoverEl.__mat) hoverEl.__mat.emissive.setHex(0x000000);
+  hoverEl = h;
+  if (hoverEl && hoverEl.__mat) hoverEl.__mat.emissive.setHex(0x261c0e);
+  folders.forEach(f => {
+    const glow = held && held.el.__meta && held.el.__meta.dest === f.key;
+    f.body.material.emissive.setHex(glow ? 0x2c2108 : 0x000000);
+  });
+}
+
 function grabEntity(el, mode, ctrl) {
   held = { el, mode, ctrl };
   el.object3D.scale.set(1.06, 1.06, 1.06);
   const what = el.classList.contains('folder') ? 'katalog ' + el.__meta.key : el.__meta.name;
-  msg('Podniesiono ' + what + '. Kliknij jeszcze raz, żeby odłożyć.');
+  if (el.__scored) { msg('Ta kartka już leży tam, gdzie trzeba. Odłóż ją z powrotem.'); return; }
+  const where = el.classList.contains('folder') ? 'Odłóż katalog gdzie chcesz.'
+    : el.__meta.dest === 'kosz' ? 'Cel: kosz obok biurka.'
+    : 'Cel: ' + folders.find(f => f.key === el.__meta.dest).label + '.';
+  msg('Podniesiono ' + what + ' · ' + where + ' Kliknij lub naciśnij trigger, żeby odłożyć.');
 }
 function release() {
   const el = held.el;
   el.object3D.scale.set(1, 1, 1);
+  if (held.proxy) sceneEl.object3D.remove(held.proxy);
   held = null;
   if (el.classList.contains('folder')) { fallFolder(el); return; }
   dropPaper(el, zoneFor(el.object3D.position));
@@ -351,10 +414,12 @@ function fallFolder(el) {
   msg('Katalog odłożony. Teraz wrzucaj do niego kartki.');
 }
 function dropPaper(el, zone) {
+  if (el.__scored) { fallPaper(el); msg(el.__meta.name + ' już trafiła do celu. Odłóż ją gdzie chcesz.'); return; }
   if (zone === null) { fallPaper(el); msg(el.__meta.name + ' odłożona. Sprawdź, gdzie powinna trafić.'); return; }
   if (el.__meta.dest === zone) success(el, zone); else fail(el, zone);
 }
 function success(el, zone) {
+  el.__scored = true;
   counts[zone]++; done++; salary += 45;
   if (zone === 'kosz') {
     const ox = Math.random() * 0.26 - 0.13, oz = Math.random() * 0.26 - 0.13;
@@ -436,27 +501,78 @@ function drawDomHud() {
 }
 
 const ctrlEls = [];
+let gamepadPress = false;
 function buildControllers() {
   ['left', 'right'].forEach(hand => {
     const c = document.createElement('a-entity');
     c.setAttribute('laser-controls', 'hand: ' + hand);
-    c.setAttribute('raycaster', 'objects: .grab; far: 30');
+    c.setAttribute('raycaster', 'objects: .grab; far: 30; lineColor: #ffd9a8');
     sceneEl.appendChild(c);
     c.addEventListener('mousemove', e => { c.__hover = walkUp(e.detail.intersection.object); });
     c.addEventListener('mouseleave', () => { c.__hover = null; });
     c.addEventListener('triggerdown', () => {
-      ensureAudio();
+      ensureAudio(); gamepadPress = true;
       if (held) release();
       else if (c.__hover) grabEntity(c.__hover, 'ctrl', c);
+    });
+    c.addEventListener('triggerup', () => { gamepadPress = false; });
+    c.addEventListener('click', e => {
+      if (gamepadPress) return;
+      ensureAudio();
+      const hit = e.detail && e.detail.intersection ? walkUp(e.detail.intersection.object) : null;
+      if (held) release();
+      else if (hit) grabEntity(hit, 'ctrl', c);
     });
     ctrlEls.push(c);
   });
 }
+function rayFromPose(pose) {
+  const m = new THREE.Matrix4().fromArray(pose.transform.matrix);
+  ray.set(new THREE.Vector3().setFromMatrixPosition(m),
+    new THREE.Vector3(0, 0, -1).transformDirection(m));
+  const hits = ray.intersectObjects(grabEls.map(el => el.object3D), true);
+  return { hit: hits.length ? walkUp(hits[0].object) : null, matrix: m };
+}
 sceneEl.addEventListener('enter-vr', () => {
   if (!ctrlEls.length) buildControllers();
+  const sess = sceneEl.xrSession;
+  if (sess && !sess.__grabHooked) {
+    sess.__grabHooked = true;
+    sess.addEventListener('selectstart', ev => {
+      if (gamepadPress) return;
+      ensureAudio();
+      const sys = sceneEl.systems['tracked-controls-webxr'];
+      const ref = sys && sys.referenceSpace;
+      if (!ref) return;
+      const pose = ev.frame.getPose(ev.inputSource.targetRaySpace, ref);
+      if (!pose) return;
+      const r = rayFromPose(pose);
+      if (held) release();
+      else if (r.hit) {
+        const proxy = new THREE.Object3D();
+        proxy.matrix.copy(r.matrix); proxy.matrixWorld.copy(r.matrix);
+        sceneEl.object3D.add(proxy);
+        grabEntity(r.hit, 'ctrl', null);
+        held.proxy = proxy; held.inputSource = ev.inputSource;
+      }
+    });
+  }
   msg('WebXR działa. Trigger podnosi kartkę, drugi trigger ją odkłada.');
 });
-sceneEl.addEventListener('exit-vr', () => { if (held) release(); });
+sceneEl.addEventListener('exit-vr', () => { if (held) release(); gamepadPress = false; });
+
+AFRAME.registerComponent('xr-held-pose', {
+  tick(time, delta, xrFrame) {
+    if (!xrFrame || !held || !held.proxy || !held.inputSource) return;
+    const sys = sceneEl.systems['tracked-controls-webxr'];
+    const ref = sys && sys.referenceSpace;
+    if (!ref) return;
+    const pose = xrFrame.getPose(held.inputSource.targetRaySpace, ref);
+    if (!pose) return;
+    held.proxy.matrix.fromArray(pose.transform.matrix);
+    held.proxy.updateMatrixWorld(true);
+  }
+});
 
 sceneEl.addEventListener('mousedown', e => { downPos = { x: e.clientX, y: e.clientY }; ensureAudio(); });
 window.addEventListener('mouseup', e => {
@@ -482,15 +598,19 @@ function loop(t) {
       o.position.copy(camPos).addScaledVector(camDir, 0.62);
       o.quaternion.copy(sceneEl.camera.quaternion);
     } else if (held.mode === 'ctrl') {
-      held.ctrl.object3D.getWorldPosition(ctrlP);
-      held.ctrl.object3D.getWorldQuaternion(ctrlQ);
-      ctrlFwd.set(0, 0, -1).applyQuaternion(ctrlQ);
-      o.position.copy(ctrlP).addScaledVector(ctrlFwd, 0.22);
-      o.position.y += 0.06;
-      o.quaternion.copy(ctrlQ);
+      const src = held.ctrl ? held.ctrl.object3D : held.proxy;
+      if (src) {
+        src.getWorldPosition(ctrlP);
+        src.getWorldQuaternion(ctrlQ);
+        ctrlFwd.set(0, 0, -1).applyQuaternion(ctrlQ);
+        o.position.copy(ctrlP).addScaledVector(ctrlFwd, 0.22);
+        o.position.y += 0.06;
+        o.quaternion.copy(ctrlQ);
+      }
     }
   }
   advanceTweens(dt);
+  highlightTick();
   const tt = t / 1000;
   papers.forEach(el => {
     if (held && held.el === el) return;
@@ -507,7 +627,7 @@ function loop(t) {
 sceneEl.addEventListener('loaded', () => {
   FOLDER_DEFS.forEach(buildFolder);
   PAPERS.forEach(buildPaper);
-  buildScreen(); buildHud3d(); buildBinLabel();
+  buildScreen(); buildHud3d(); buildBinLabel(); buildPoster();
   refreshGrabList();
   drawDomHud();
   document.getElementById('xrstate').textContent = navigator.xr
